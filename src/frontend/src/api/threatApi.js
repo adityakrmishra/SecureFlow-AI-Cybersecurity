@@ -11,3 +11,4 @@ export const fetchThreatData = async () => {
     return { threats: [], alerts: [] };
   }
 };
+
