@@ -2,4 +2,3 @@ timestamp,src_ip,dst_ip,protocol,length,payload
 2023-08-20 14:30:01,192.168.1.100,93.184.216.34,TCP,1500,GET / HTTP/1.1
 2023-08-20 14:30:02,192.168.1.101,8.8.8.8,UDP,78,DNS Query: malicious-domain.xyz
 2023-08-20 14:30:03,192.168.1.102,192.168.1.1,ICMP,64,ECHO_REQUEST
-a
