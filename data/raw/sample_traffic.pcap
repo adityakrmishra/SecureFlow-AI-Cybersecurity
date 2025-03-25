@@ -1,0 +1,30 @@
+# data/raw/generate_sample_pcap.py
+import dpkt
+import datetime
+
+def create_sample_pcap():
+    with open('data/raw/sample_traffic.pcap', 'wb') as f:
+        pcap_writer = dpkt.pcap.Writer(f)
+        
+        # Normal HTTP traffic
+        eth_normal = dpkt.ethernet.Ethernet()
+        ip_normal = dpkt.ip.IP(src=b'\xc0\xa8\x01\x01', dst=b'\xc0\xa8\x01\xfe')
+        tcp_normal = dpkt.tcp.TCP(sport=12345, dport=80)
+        tcp_normal.data = b'GET / HTTP/1.0\r\n\r\n'
+        ip_normal.data = tcp_normal
+        eth_normal.data = ip_normal
+        pcap_writer.writepkt(eth_normal, ts=datetime.datetime.now().timestamp())
+
+        # Suspicious DNS traffic
+        eth_dns = dpkt.ethernet.Ethernet()
+        ip_dns = dpkt.ip.IP(src=b'\xc0\xa8\x01\x02', dst=b'\x08\x08\x08\x08')
+        udp_dns = dpkt.udp.UDP(sport=54321, dport=53)
+        udp_dns.data = dpkt.dns.DNS(
+            qd=[dpkt.dns.DNS.Q(name='malicious-domain.xyz')]
+        ).pack()
+        ip_dns.data = udp_dns
+        eth_dns.data = ip_dns
+        pcap_writer.writepkt(eth_dns, ts=datetime.datetime.now().timestamp())
+
+if __name__ == "__main__":
+    create_sample_pcap()
