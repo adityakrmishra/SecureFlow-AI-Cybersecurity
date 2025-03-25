@@ -1,0 +1,14 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.env
+*.ipynb
+*.md
+Dockerfile
+docker-compose.yml
+data/
+notebooks/
+frontend/
+tests/
