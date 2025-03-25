@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  secureflow-api:
+    build: .
+    image: secureflow-api:1.0
+    container_name: secureflow-api
+    environment:
+      - POSTGRES_HOST=secureflow-db
+      - REDIS_HOST=secureflow-redis
+      - VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY}
+    ports:
+      - "8000:8000"
+    networks:
+      - secureflow-net
+    depends_on:
+      - secureflow-db
+      - secureflow-redis
+
+  secureflow-redis:
+    image: redis:alpine
+    container_name: secureflow-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - secureflow-net
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+
+  secureflow-db:
+    image: postgres:14-alpine
+    container_name: secureflow-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - secureflow-net
+
+  splunk:
+    image: splunk/splunk:latest
+    container_name: secureflow-splunk
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_PASSWORD=${SPLUNK_PASSWORD}
+    ports:
+      - "8008:8000"
+      - "8088:8088"
+    networks:
+      - secureflow-net
+
+volumes:
+  pg_data:
+  redis_data:
+
+networks:
+  secureflow-net:
+    driver: bridge
