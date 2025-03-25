@@ -42,4 +42,52 @@ MIT License - See LICENSE
 3. **ioc_rules.json** - Custom threat detection rules.  
 4. **playbooks/ransomware_playbook.json** - Automated response logic.  
 
-Let me know if you need code snippets for specific components! 🛡️
+
+## GITHUB REPO STRUCTURE
+```
+SecureFlow-AI-Cybersecurity/
+├── src/
+│   ├── backend/                    # Python backend logic
+│   │   ├── ml_models/              # ML models (TensorFlow/PyTorch)
+│   │   │   ├── phishing_detection.py
+│   │   │   ├── ransomware_detector.ipynb
+│   │   │   └── anomaly_detection/
+│   │   │       └── isolation_forest.py
+│   │   ├── siem_integration/       # SIEM tools integration
+│   │   │   ├── splunk_connector.py
+│   │   │   └── elk_stack.py
+│   │   ├── network_analysis/       # Network traffic analysis
+│   │   │   ├── packet_analyzer.py
+│   │   │   └── flow_classifier.py
+│   │   └── automation/             # Incident response automation
+│   │       ├── playbooks/
+│   │       │   └── ransomware_playbook.json
+│   │       └── response_engine.py
+│   └── frontend/                   # JS-based dashboard (optional)
+│       ├── public/
+│       └── src/
+│           └── components/
+├── config/
+│   ├── env.example                 # Environment variables template
+│   ├── rulesets/                   # Detection rules
+│   │   └── ioc_rules.json
+│   └── docker-compose.yml          # Multi-container setup
+├── data/
+│   ├── raw/                        # Sample network traffic logs
+│   └── processed/                  # Preprocessed datasets
+├── tests/                          # Unit & integration tests
+│   ├── test_phishing_model.py
+│   └── test_network_analysis.py
+├── docs/                           # Documentation
+│   ├── architecture_diagram.pdf
+│   └── API_Reference.md
+├── scripts/                        # Utility scripts
+│   ├── deploy.sh
+│   └── data_ingestion.py
+├── Dockerfile                      # Containerization
+├── requirements.txt                # Python dependencies
+├── README.md                       # Project overview
+└── .github/                        # CI/CD workflows
+    └── workflows/
+        └── python-ci.yml
+```
