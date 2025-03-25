@@ -1,0 +1,43 @@
+{
+    "name": "Ransomware Response Playbook",
+    "version": "1.0.0",
+    "description": "Automated response to ransomware detection",
+    "triggers": ["ransomware_detected", "mass_file_encryption"],
+    "actions": [
+        {
+            "name": "isolate_host",
+            "type": "network",
+            "parameters": {
+                "ip_address": "{source_ip}",
+                "quarantine_duration": 3600
+            },
+            "priority": "critical"
+        },
+        {
+            "name": "collect_forensic_data",
+            "type": "investigation",
+            "parameters": {
+                "artifacts": ["memory_dump", "process_list"]
+            }
+        },
+        {
+            "name": "block_ioc",
+            "type": "firewall",
+            "parameters": {
+                "iocs": ["{malicious_hash}", "{c2_server}"]
+            }
+        },
+        {
+            "name": "alert_soc",
+            "type": "notification",
+            "parameters": {
+                "severity": "critical",
+                "recipients": ["soc@example.com"]
+            }
+        }
+    ],
+    "metadata": {
+        "created": "2023-08-20",
+        "author": "SecureFlow Team"
+    }
+}
