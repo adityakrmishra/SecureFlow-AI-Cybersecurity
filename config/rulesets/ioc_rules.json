@@ -1,0 +1,49 @@
+{
+  "version": "1.2.0",
+  "rules": [
+    {
+      "name": "CobaltStrike_Beacon",
+      "type": "domain",
+      "pattern": ".*\\.akamaitechcloud\\.com$",
+      "severity": "critical",
+      "description": "Cobalt Strike C2 domain pattern",
+      "mitigation": [
+        "Isolate affected systems",
+        "Block domain at firewall",
+        "Collect memory artifacts"
+      ],
+      "active": true
+    },
+    {
+      "name": "Ransomware_Extension",
+      "type": "file",
+      "pattern": "\\.(locky|zepto|xyz|crypt)$",
+      "severity": "high",
+      "description": "Common ransomware file extensions",
+      "mitigation": [
+        "Quarantine file",
+        "Check backup integrity",
+        "Initiate incident response"
+      ],
+      "active": true
+    },
+    {
+      "name": "Mimikatz_Hash",
+      "type": "hash",
+      "pattern": "a5c0a0e465a52034682d8e70b3d793fc",
+      "severity": "critical",
+      "description": "Known Mimikatz component hash",
+      "mitigation": [
+        "Reset domain admin credentials",
+        "Check DC replication status",
+        "Hunt for lateral movement"
+      ],
+      "active": true
+    }
+  ],
+  "metadata": {
+    "created": "2023-08-20",
+    "updated": "2023-08-20",
+    "author": "SecureFlow Threat Intel Team"
+  }
+}
