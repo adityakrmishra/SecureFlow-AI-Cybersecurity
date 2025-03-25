@@ -1,0 +1,19 @@
+{
+    "indicators": [
+        {
+            "type": "ip",
+            "value": "93.184.216.34",
+            "threat_type": "phishing",
+            "confidence": 0.95,
+            "first_seen": "2023-08-01",
+            "last_seen": "2023-08-20"
+        },
+        {
+            "type": "domain",
+            "value": "malicious-domain.xyz",
+            "threat_type": "c2_server",
+            "confidence": 0.99,
+            "sources": ["VirusTotal", "AlienVault OTX"]
+        }
+    ]
+}
